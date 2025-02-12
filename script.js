@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
-    let yesBtn = document.getElementById("yesBtn"); 
-    let noClickCount = 0;
-
+    const yesBtn = document.getElementById("yesBtn");
     const tauntDiv = document.getElementById("tauntMessage");
 
-    yesBtn.style.display = "none";
+    let noClickCount = 0;
 
     function askQuestion() {
         let answer = prompt("Who is your love? ❤️");
@@ -16,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             askQuestion();
         }
     }
-    
+
     yesBtn.addEventListener("click", function () {
         if (noClickCount < 3) {
             const messages = [
@@ -25,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Are you really really sure? 😍"
             ];
             tauntDiv.innerText = messages[noClickCount];
+            tauntDiv.style.display = "block";
             noClickCount++;
         } else {
             showCelebration();
@@ -45,19 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
             "Hehe, not today! 😛"
         ];
         tauntDiv.innerText = tauntMessages[Math.floor(Math.random() * tauntMessages.length)];
+        tauntDiv.style.display = "block";
     });
 
     function showCelebration() {
-        document.getElementById("message").style.display = "block";
+        document.getElementById("celebrationMessage").style.display = "block";
         document.getElementById("collage").style.display = "grid";
         showFireworks();
     }
 
     function showFireworks() {
-        const container = document.createElement("div");
-        container.id = "hearts-container";
-        document.body.appendChild(container);
-
+        const container = document.getElementById("hearts-container");
         for (let i = 0; i < 30; i++) {
             const heart = document.createElement("div");
             heart.innerHTML = "❤️";
