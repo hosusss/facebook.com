@@ -1,72 +1,23 @@
-body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: pink;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    overflow: hidden; /* Prevents scrollbars when "No" moves */
-    position: relative;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-h1 {
-    font-size: 2.5rem;
-    color: red;
-}
+    <h1>Will You Be My Valentine? ❤️</h1>
+    
+    <div id="container">
+        <button id="noBtn" onclick="moveNoButton()">No</button>
+        <button id="yesBtn" onclick="showFinalMessage()">Yes</button>
+    </div>
 
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
+    <div id="message" style="display: none;">Happy Valentine's and Happy 7 Monthsary, My Love! 💖</div>
 
-button {
-    font-size: 1.5rem;
-    padding: 15px 30px;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 0.3s;
-}
+    <script src="script.js"></script>
 
-#yesBtn {
-    background-color: #4CAF50;
-    color: white;
-    display: none; /* Hidden until the correct answer is given */
-}
-
-#noBtn {
-    background-color: #f44336;
-    color: white;
-    position: absolute;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
-
-/* Final Message */
-#message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 2rem;
-    color: red;
-}
-
-/* Fireworks */
-@keyframes explode {
-    0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(2); opacity: 0; }
-}
-
-/* Falling Hearts */
-@keyframes fall {
-    0% { transform: translateY(-10vh); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
-}
+</body>
+</html>
