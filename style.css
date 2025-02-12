@@ -2,7 +2,7 @@
 body {
     text-align: center;
     font-family: Arial, sans-serif;
-    background-color: pink;
+    background-color: #ffb6c1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,11 +12,13 @@ body {
     position: relative;
 }
 
+/* Title */
 h1 {
     font-size: 2.5rem;
     color: red;
 }
 
+/* Button Container */
 #container {
     display: flex;
     flex-direction: column;
@@ -24,6 +26,7 @@ h1 {
     gap: 20px;
 }
 
+/* General Button Styles */
 button {
     font-size: 1.5rem;
     padding: 15px 30px;
@@ -33,20 +36,38 @@ button {
     transition: 0.3s;
 }
 
+/* "Yes" Button */
 #yesBtn {
     background-color: #4CAF50;
     color: white;
     display: none; /* Hidden until the correct answer is given */
 }
 
+/* "No" Button */
 #noBtn {
     background-color: #f44336;
     color: white;
     position: absolute;
 }
 
+/* Button Hover Effect */
 button:hover {
     transform: scale(1.1);
+}
+
+/* Taunt Message Styling */
+#tauntMessage {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: none; /* Initially hidden */
 }
 
 /* Final Message */
@@ -60,13 +81,7 @@ button:hover {
     color: red;
 }
 
-/* Fireworks */
-@keyframes explode {
-    0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(2); opacity: 0; }
-}
-
-/* Falling Hearts */
+/* Falling Hearts Animation */
 @keyframes fall {
     0% { transform: translateY(-10vh); opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
