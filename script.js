@@ -3,20 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let yesBtn; // "Yes" button will be created later
     let noClickCount = 0;
 
-    // Create a div for taunts
-    const tauntDiv = document.createElement("div");
-    tauntDiv.style.position = "fixed";
-    tauntDiv.style.top = "10%";
-    tauntDiv.style.left = "50%";
-    tauntDiv.style.transform = "translateX(-50%)";
-    tauntDiv.style.fontSize = "24px";
-    tauntDiv.style.color = "white";
-    tauntDiv.style.textShadow = "2px 2px 10px rgba(255, 0, 102, 0.8)";
-    tauntDiv.style.fontFamily = "Dancing Script, cursive";
-    tauntDiv.style.textAlign = "center";
-    document.body.appendChild(tauntDiv);
-
-    // Ask the question before showing "Yes" button
     function askQuestion() {
         let answer = prompt("Who is your love? ❤️");
         if (answer && answer.trim().toLowerCase() === "miles") {
@@ -26,25 +12,33 @@ document.addEventListener("DOMContentLoaded", function () {
             askQuestion();
         }
     }
-    
-    // Function to create "Yes" button after correct answer
+
     function createYesButton() {
         yesBtn = document.createElement("button");
         yesBtn.innerText = "Yes";
+        yesBtn.id = "yesBtn";
         yesBtn.className = "btn yes-btn";
         document.getElementById("container").appendChild(yesBtn);
-
+        
         yesBtn.addEventListener("click", function () {
-            if (noClickCount < 2) {
-                tauntDiv.innerText = "Are you sure? Think again! 😏";
-                noClickCount++;
-            } else {
-                showCelebration();
+            let questions = [
+                "Are you sure?", 
+                "Are you really sure?", 
+                "Are you really really sure? 🤩"
+            ];
+            
+            for (let i = 0; i < questions.length; i++) {
+                let confirmAnswer = confirm(questions[i]);
+                if (!confirmAnswer) {
+                    return;
+                }
             }
+            
+            document.getElementById("message").innerText = "YAY! You said YES! 💖";
+            showCelebration();
         });
     }
 
-    // Make "No" button move and display taunts
     noBtn.addEventListener("mouseover", function () {
         const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
         const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
@@ -52,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
 
-        // Display a playful taunt
         let tauntMessages = [
             "You can't catch me! 😜",
             "Too slow! 😆",
@@ -60,14 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "Keep chasing me! 😏",
             "Hehe, not today! 😛"
         ];
-        tauntDiv.innerText = tauntMessages[Math.floor(Math.random() * tauntMessages.length)];
+        document.getElementById("tauntMessage").innerText = tauntMessages[Math.floor(Math.random() * tauntMessages.length)];
     });
 
     function showCelebration() {
         document.body.innerHTML = `
             <div id="message">
-                <h1>🎉 Advance Happy Valentine's Day! 💖</h1>
-                <h2>Advance Happy 7th Monthsary, My Love! ❤️</h2>
+                <h1>🎉 Happy Valentine's Day! 💖</h1>
+                <h2>Happy 7th Monthsary, My Love! ❤️</h2>
                 <img src="love.jpg" alt="Love" style="width: 300px; display: block; margin: 20px auto;">
             </div>
         `;
@@ -114,6 +107,5 @@ document.addEventListener("DOMContentLoaded", function () {
         document.head.appendChild(style);
     }
 
-    // Start the question prompt when the page loads
     askQuestion();
 });
