@@ -1,24 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
-    let yesBtn; // "Yes" button will be created later after answering the question
+    let yesBtn; // "Yes" button will be created later
     let noClickCount = 0;
 
-    // Center the buttons
-    const btnContainer = document.createElement("div");
-    btnContainer.style.position = "fixed";
-    btnContainer.style.top = "50%";
-    btnContainer.style.left = "50%";
-    btnContainer.style.transform = "translate(-50%, -50%)";
-    btnContainer.style.display = "flex";
-    btnContainer.style.gap = "20px"; // Space between buttons
-
-    noBtn.style.fontSize = "24px";
-    noBtn.style.padding = "15px 30px";
-    noBtn.style.position = "relative";
-    noBtn.style.cursor = "pointer";
-
-    document.body.appendChild(btnContainer);
-    btnContainer.appendChild(noBtn);
+    // Create a div for taunts
+    const tauntDiv = document.createElement("div");
+    tauntDiv.style.position = "fixed";
+    tauntDiv.style.top = "10%";
+    tauntDiv.style.left = "50%";
+    tauntDiv.style.transform = "translateX(-50%)";
+    tauntDiv.style.fontSize = "24px";
+    tauntDiv.style.color = "white";
+    tauntDiv.style.textShadow = "2px 2px 10px rgba(255, 0, 102, 0.8)";
+    tauntDiv.style.fontFamily = "Dancing Script, cursive";
+    tauntDiv.style.textAlign = "center";
+    document.body.appendChild(tauntDiv);
 
     // Ask the question before showing "Yes" button
     function askQuestion() {
@@ -35,15 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function createYesButton() {
         yesBtn = document.createElement("button");
         yesBtn.innerText = "Yes";
-        yesBtn.style.fontSize = "24px";
-        yesBtn.style.padding = "15px 30px";
-        yesBtn.style.cursor = "pointer";
-
-        btnContainer.appendChild(yesBtn);
+        yesBtn.className = "btn yes-btn";
+        document.getElementById("btnContainer").appendChild(yesBtn);
 
         yesBtn.addEventListener("click", function () {
             if (noClickCount < 2) {
-                alert("Are you sure? Think again! 😏");
+                tauntDiv.innerText = "Are you sure? Think again! 😏";
                 noClickCount++;
             } else {
                 showCelebration();
@@ -51,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Make "No" button move and taunt when hovered over
+    // Make "No" button move and display taunts
     noBtn.addEventListener("mouseover", function () {
         const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
         const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
@@ -67,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Keep chasing me! 😏",
             "Hehe, not today! 😛"
         ];
-        alert(tauntMessages[Math.floor(Math.random() * tauntMessages.length)]);
+        tauntDiv.innerText = tauntMessages[Math.floor(Math.random() * tauntMessages.length)];
     });
 
     function showCelebration() {
