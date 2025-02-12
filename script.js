@@ -1,57 +1,72 @@
-let yesCount = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    let noClickCount = 0;
 
-document.getElementById("noBtn").addEventListener("mouseover", function() {
-    this.style.top = Math.random() * window.innerHeight + "px";
-    this.style.left = Math.random() * window.innerWidth + "px";
-});
+    // Make "No" button move when hovered over
+    noBtn.addEventListener("mouseover", function () {
+        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    });
 
-document.getElementById("yesBtn").addEventListener("click", function() {
-    yesCount++;
-    if (yesCount < 3) {
-        alert("Are you sure? 😊");
-    } else {
-        startCelebration();
+    yesBtn.addEventListener("click", function () {
+        if (noClickCount < 2) {
+            alert("Are you sure? Think again! 😏");
+            noClickCount++;
+        } else {
+            showCelebration();
+        }
+    });
+
+    function showCelebration() {
+        document.body.innerHTML = `
+            <div id="message">
+                <h1>🎉 Happy Valentine's Day! 💖</h1>
+                <h2>Happy 7th Monthsary, My Love! ❤️</h2>
+            </div>
+        `;
+        showFireworks();
+    }
+
+    function showFireworks() {
+        const container = document.createElement("div");
+        container.style.position = "fixed";
+        container.style.width = "100vw";
+        container.style.height = "100vh";
+        container.style.top = "0";
+        container.style.left = "0";
+        container.style.pointerEvents = "none";
+        document.body.appendChild(container);
+
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.style.position = "absolute";
+            heart.style.fontSize = `${Math.random() * 30 + 20}px`;
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+            container.appendChild(heart);
+        }
+
+        const style = document.createElement("style");
+        style.innerHTML = `
+            @keyframes fall {
+                0% { transform: translateY(-10vh); opacity: 1; }
+                100% { transform: translateY(100vh); opacity: 0; }
+            }
+            #message {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                font-size: 2rem;
+                font-family: Arial, sans-serif;
+                color: red;
+            }
+        `;
+        document.head.appendChild(style);
     }
 });
-
-function startCelebration() {
-    document.body.innerHTML = "<h1>Yay! 🎉💖</h1>";
-    createFireworks();
-    createFallingHearts();
-}
-
-// Fireworks effect
-function createFireworks() {
-    let script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2";
-    script.onload = () => confetti();
-    document.body.appendChild(script);
-}
-
-// Falling hearts effect
-function createFallingHearts() {
-    let style = document.createElement("style");
-    style.innerHTML = `
-        @keyframes fall {
-            0% { transform: translateY(-10vh); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        .heart {
-            position: absolute;
-            top: 0;
-            font-size: 2rem;
-            color: red;
-            animation: fall linear infinite;
-        }
-    `;
-    document.head.appendChild(style);
-
-    for (let i = 0; i < 30; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-        document.body.appendChild(heart);
-    }
-}
