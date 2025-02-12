@@ -1,4 +1,3 @@
-/* Basic Styling */
 body {
     text-align: center;
     font-family: Arial, sans-serif;
@@ -12,13 +11,11 @@ body {
     position: relative;
 }
 
-/* Main Heading */
 h1 {
     font-size: 2.5rem;
     color: red;
 }
 
-/* Container for Buttons */
 #container {
     display: flex;
     flex-direction: column;
@@ -26,7 +23,6 @@ h1 {
     gap: 20px;
 }
 
-/* Button Styling */
 button {
     font-size: 1.5rem;
     padding: 15px 30px;
@@ -36,26 +32,23 @@ button {
     transition: 0.3s;
 }
 
-/* Yes Button - Hidden Until Answered */
 #yesBtn {
     background-color: #4CAF50;
     color: white;
-    display: none; 
+    display: none; /* Hidden until the correct answer is given */
 }
 
-/* No Button - Moves Around */
 #noBtn {
     background-color: #f44336;
     color: white;
     position: absolute;
 }
 
-/* Hover Effects */
 button:hover {
     transform: scale(1.1);
 }
 
-/* Final Message Styling */
+/* Final Message */
 #message {
     position: fixed;
     top: 50%;
@@ -66,13 +59,13 @@ button:hover {
     color: red;
 }
 
-/* Fireworks Animation */
+/* Fireworks */
 @keyframes explode {
     0% { transform: scale(0); opacity: 1; }
     100% { transform: scale(2); opacity: 0; }
 }
 
-/* Falling Hearts Animation */
+/* Falling Hearts */
 @keyframes fall {
     0% { transform: translateY(-10vh); opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
