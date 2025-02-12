@@ -23,7 +23,10 @@ def create_directory(directory):
 
 # Function to center the text
 def center_text(draw, text, font, image_width):
-    text_width, text_height = draw.textsize(text, font=font)
+    # Using textbbox instead of textsize
+    text_bbox = draw.textbbox((0, 0), text, font=font)  # Get bounding box
+    text_width = text_bbox[2] - text_bbox[0]  # Width of the text
+    text_height = text_bbox[3] - text_bbox[1]  # Height of the text
     position = ((image_width - text_width) / 2, 50)  # Adjust the vertical position (50) as needed
     return position
 
