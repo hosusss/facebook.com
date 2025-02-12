@@ -16,7 +16,7 @@ body {
 h1 {
     font-size: 3rem;
     color: red;
-    text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.6);
+    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.8);
     animation: glow 1.5s infinite alternate;
 }
 
@@ -32,16 +32,18 @@ h1 {
     align-items: center;
     gap: 20px;
     position: relative;
+    margin-top: 20px;
 }
 
 /* General Button Styles */
 button {
     font-size: 1.8rem;
     padding: 15px 35px;
+    margin: 10px;
     border: none;
     cursor: pointer;
     border-radius: 15px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -61,7 +63,7 @@ button {
 
 /* "No" Button */
 #noBtn {
-    background-color: #f44336;
+    background-color: red;
     color: white;
     position: absolute;
     transition: transform 0.2s ease-in-out;
@@ -130,36 +132,4 @@ button:hover {
 /* Adding more hearts dynamically */
 #hearts-container {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    overflow: hidden;
-} 
-
-/* JavaScript to Handle Button Clicks */
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
-        const message = document.getElementById("message");
-
-        yesBtn.addEventListener("click", function () {
-            let questions = [
-                "Are you sure?", 
-                "Are you really sure?", 
-                "Are you really really sure? 🤩"
-            ];
-            
-            for (let i = 0; i < questions.length; i++) {
-                let confirmAnswer = confirm(questions[i]);
-                if (!confirmAnswer) {
-                    return;
-                }
-            }
-            
-            message.innerText = "YAY! You said YES! 💖";
-        });
-    });
-</script>
+    width: 
