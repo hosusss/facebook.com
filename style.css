@@ -1,4 +1,4 @@
-/* Valentine Theme Background */
+/* Valentine Theme */
 body {
     text-align: center;
     font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@ body {
     position: relative;
 }
 
-/* Title */
+/* Title Animation */
 h1 {
     font-size: 3rem;
     color: red;
@@ -25,7 +25,7 @@ h1 {
     100% { text-shadow: 4px 4px 20px rgba(255, 0, 0, 1); }
 }
 
-/* Button Container */
+/* Buttons Container */
 #container {
     display: flex;
     flex-direction: column;
