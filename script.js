@@ -55,18 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function showCelebration() {
-        document.body.innerHTML = `
-            <div id="message">
-                <h1>🎉 Happy Valentine's Day! 💖</h1>
-                <h2>Happy 7th Monthsary, My Love! ❤️</h2>
-                <div id="imageContainer">
-                    <img src="love.jpg" alt="Love" class="final-img">
-                    <img src="love1.jpg" alt="Love" class="final-img">
-                    <img src="love2.jpg" alt="Love" class="final-img">
-                    <img src="love3.jpg" alt="Love" class="final-img">
-                </div>
-            </div>
-        `;
+        document.getElementById("message").style.display = "block"; // Show message
+        document.getElementById("imageContainer").style.display = "block"; // Show images
         showFireworks();
     }
 
