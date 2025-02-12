@@ -3,17 +3,23 @@ name: Valentine's Script
 on:
   push:
     branches:
-      - main
+      - main  # Runs on push to the main branch
   pull_request:
     branches:
-      - main
+      - main  # Runs on pull request to main branch
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensures all commits are available
+
+      - name: Debug - List all files
+        run: ls -R  # Check if the valentines_script.py file exists
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -25,8 +31,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install --no-cache-dir --force-reinstall -r requirements.txt
 
-      - name: Debug - List files
-        run: ls -R  # Check if valentines_script.py exists
-
       - name: Run the Valentine's Script
-        run: python valentines_script.py  # Update if inside a folder
+        run: python valentines_script.py  # Adjust path if needed
