@@ -36,7 +36,6 @@ jobs:
     # Step 5: Run the script and check if everything is working
     - name: Run the script
       run: |
-        # Debug: Ensure the image is being created
         python -c "
 import os
 from PIL import Image
