@@ -1,47 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
-    let yesBtn; // "Yes" button will be created later
+    let yesBtn = document.getElementById("yesBtn"); // Get Yes button
     let noClickCount = 0;
 
     // Create a div for taunts
-    const tauntDiv = document.createElement("div");
-    tauntDiv.id = "tauntMessage";
-    document.body.appendChild(tauntDiv);
+    const tauntDiv = document.getElementById("tauntMessage");
+
+    // Hide "Yes" button initially
+    yesBtn.style.display = "none";
 
     // Ask the question before showing "Yes" button
     function askQuestion() {
         let answer = prompt("Who is your love? ❤️");
         if (answer && answer.trim().toLowerCase() === "miles") {
-            createYesButton();
+            yesBtn.style.display = "inline-block"; // Show "Yes" button
         } else {
             alert("Wrong answer! Try again. 😏");
             askQuestion();
         }
     }
     
-    // Function to create "Yes" button after correct answer
-    function createYesButton() {
-        yesBtn = document.createElement("button");
-        yesBtn.innerText = "Yes";
-        yesBtn.id = "yesBtn";
-        yesBtn.className = "btn yes-btn";
-        document.getElementById("container").appendChild(yesBtn);
-
-        yesBtn.addEventListener("click", function () {
-            if (noClickCount === 0) {
-                tauntDiv.innerText = "Are you sure? 🤔";
-                noClickCount++;
-            } else if (noClickCount === 1) {
-                tauntDiv.innerText = "Are you really sure? 😳";
-                noClickCount++;
-            } else if (noClickCount === 2) {
-                tauntDiv.innerText = "Are you really really sure? 😍";
-                noClickCount++;
-            } else {
-                showCelebration();
-            }
-        });
-    }
+    // "Yes" button click event
+    yesBtn.addEventListener("click", function () {
+        if (noClickCount === 0) {
+            tauntDiv.innerText = "Are you sure? 🤔";
+            noClickCount++;
+        } else if (noClickCount === 1) {
+            tauntDiv.innerText = "Are you really sure? 😳";
+            noClickCount++;
+        } else if (noClickCount === 2) {
+            tauntDiv.innerText = "Are you really really sure? 😍";
+            noClickCount++;
+        } else {
+            showCelebration();
+        }
+    });
 
     // Make "No" button move and display taunts
     noBtn.addEventListener("mouseover", function () {
@@ -64,12 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function showCelebration() {
         document.body.innerHTML = `
             <div id="message">
-                <h1>🎉 Advance Happy Valentine's Day! 💖</h1>
-                <h2>Advance Happy 7th Monthsary, My Love! ❤️</h2>
-                <img src="love.jpg" alt="Love" class="final-img">
-                <img src="love1.jpg" alt="Love" class="final-img">
-                <img src="love2.jpg" alt="Love" class="final-img">
-                <img src="love3.jpg" alt="Love" class="final-img">
+                <h1>🎉 Happy Valentine's Day! 💖</h1>
+                <h2>Happy 7th Monthsary, My Love! ❤️</h2>
+                <div id="imageContainer">
+                    <img src="love.jpg" alt="Love" class="final-img">
+                    <img src="love1.jpg" alt="Love" class="final-img">
+                    <img src="love2.jpg" alt="Love" class="final-img">
+                    <img src="love3.jpg" alt="Love" class="final-img">
+                </div>
             </div>
         `;
         showFireworks();
