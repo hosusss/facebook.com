@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tauntDiv = document.getElementById("tauntMessage");
     const collageContainer = document.getElementById("collage-container");
     const heartsContainer = document.getElementById("hearts-container");
+    const finalMessage = document.getElementById("finalMessage");
     let noClickCount = 0;
 
     function askQuestion() {
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         noBtn.style.display = "none";
         tauntDiv.style.display = "none";
         collageContainer.style.display = "block";
+        finalMessage.style.display = "block"; // Show the final message
         generateHearts();
     }
 
