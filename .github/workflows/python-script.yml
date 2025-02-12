@@ -66,3 +66,19 @@ try:
     img.save('valentine_fireworks.png')
 
     # Check if the image was created
+    if not os.path.exists('valentine_fireworks.png'):
+        raise Exception('Image not created.')
+
+    print('Image created successfully!')
+
+except Exception as e:
+    print(f'Error occurred: {e}')
+    exit(1)
+        "
+        
+    # Step 7: If you need to upload artifacts (like the image), you can add this
+    - name: Upload image as artifact (optional)
+      uses: actions/upload-artifact@v3
+      with:
+        name: valentine-fireworks-image
+        path: valentine_fireworks.png
