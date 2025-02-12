@@ -1,66 +1,41 @@
 body {
-    text-align: center;
+    margin: 0;
+    overflow: hidden;
     font-family: Arial, sans-serif;
-    background-color: pink;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    overflow: hidden; /* Prevents scrollbars when "No" moves */
-    position: relative;
+    background-color: #fff0f5;
 }
 
-h1 {
-    font-size: 2.5rem;
-    color: red;
-}
-
-#container {
+#btnContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 20px;
 }
 
-button {
-    font-size: 1.5rem;
+.btn {
+    font-size: 24px;
     padding: 15px 30px;
-    border: none;
     cursor: pointer;
-    border-radius: 10px;
-    transition: 0.3s;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-#yesBtn {
-    background-color: #4CAF50;
-    color: white;
-    display: none; /* Hidden until the correct answer is given */
-}
-
-#noBtn {
-    background-color: #f44336;
-    color: white;
-    position: absolute;
-}
-
-button:hover {
+.btn:hover {
     transform: scale(1.1);
 }
 
-/* Fireworks */
-@keyframes explode {
-    0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(2); opacity: 0; }
+.no-btn {
+    background-color: #ff6b6b;
 }
 
-/* Falling Hearts */
-@keyframes fall {
-    0% { transform: translateY(-10vh); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
+.yes-btn {
+    background-color: #6bff6b;
 }
 
-/* Final Message */
 #message {
     position: fixed;
     top: 50%;
@@ -68,5 +43,10 @@ button:hover {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 2rem;
-    color: red;
+    color: #ff69b4;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
 }
