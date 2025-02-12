@@ -63,12 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
         collageContainer.style.display = "flex";
 
         // Make final message appear in the middle of the collage
-        finalMessage.style.display = "block";
-        finalMessage.style.position = "absolute";
-        finalMessage.style.top = "50%";
-        finalMessage.style.left = "50%";
-        finalMessage.style.transform = "translate(-50%, -50%)";
-        finalMessage.style.zIndex = "10"; // Ensure it appears above the images
+        finalMessage.style.display = "block"; // Show the final message
+        // No need to set position here since it's handled by CSS
 
         generateHearts();
         generateFireworks();
