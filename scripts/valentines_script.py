@@ -48,11 +48,13 @@ def generate_image(path):
         # Add the first text above the heart
         text1 = "Happy Valentine's Day!"
 
-        # Draw a heart shape (centered)
+        # Draw a more rounded heart shape (centered)
         heart_width, heart_height = 200, 200  # Adjust heart dimensions
         heart_position = ((img.width - heart_width) / 2, 200)  # Adjust vertical position as needed
+
+        # Heart shape with better defined points
         draw.polygon(
-            [(heart_position[0] + 100, heart_position[1] + 50),  # Bottom center
+            [(heart_position[0] + 100, heart_position[1] + 50),  # Bottom center of the heart
              (heart_position[0] + 50, heart_position[1] + 100),  # Left bottom
              (heart_position[0] + 100, heart_position[1] + 150),  # Bottom center again
              (heart_position[0] + 150, heart_position[1] + 100),  # Right bottom
