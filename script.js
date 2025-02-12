@@ -2,6 +2,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     let noClickCount = 0;
+    let passwordAttempts = 0;
+    const correctPassword = "secret123";  // Set your password here
+
+    // Add a teaser message
+    const teaserMessage = document.createElement("div");
+    teaserMessage.innerHTML = "<h2>Want a surprise? Press 'No'! 🎁</h2>";
+    teaserMessage.style.position = "fixed";
+    teaserMessage.style.top = "20px";
+    teaserMessage.style.left = "50%";
+    teaserMessage.style.transform = "translateX(-50%)";
+    teaserMessage.style.textAlign = "center";
+    teaserMessage.style.fontSize = "1.5rem";
+    teaserMessage.style.color = "#ff3366";
+    document.body.appendChild(teaserMessage);
+
+    // Add a taunting message when she hovers over "No"
+    const tauntMessage = document.createElement("div");
+    tauntMessage.innerHTML = "<h2>You can't catch me! 😜</h2>";
+    tauntMessage.style.position = "fixed";
+    tauntMessage.style.bottom = "20px";
+    tauntMessage.style.left = "50%";
+    tauntMessage.style.transform = "translateX(-50%)";
+    tauntMessage.style.textAlign = "center";
+    tauntMessage.style.fontSize = "1.5rem";
+    tauntMessage.style.color = "#ff3366";
+    tauntMessage.style.opacity = "0";
+    document.body.appendChild(tauntMessage);
 
     // Make "No" button move when hovered over
     noBtn.addEventListener("mouseover", function () {
@@ -9,10 +36,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
+
+        // Show the taunting message when hovering over "No"
+        tauntMessage.style.opacity = "1";
+        setTimeout(() => {
+            tauntMessage.style.opacity = "0";
+        }, 1000);
     });
 
     yesBtn.addEventListener("click", function () {
-        if (noClickCount < 2) {
+        if (passwordAttempts === 0) {
+            // Ask for password on first click
+            const password = prompt("Enter the password to continue:");
+            if (password === correctPassword) {
+                alert("Password correct! But you still need to click 3 more times!");
+                passwordAttempts++;  // Increase attempt count after correct password
+            } else {
+                alert("Incorrect password. Try again!");
+            }
+        } else if (noClickCount < 2) {
             alert("Are you sure? Think again! 😏");
             noClickCount++;
         } else {
@@ -20,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Show the final celebration message
     function showCelebration() {
         document.body.innerHTML = `
             <div id="message">
@@ -30,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showFireworks();
     }
 
+    // Create fireworks animation
     function showFireworks() {
         const container = document.createElement("div");
         container.style.position = "fixed";
