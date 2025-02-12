@@ -48,47 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function showCelebration() {
-        yesBtn.style.display = "none";
-        noBtn.style.display = "none";
-        tauntDiv.style.display = "none";
-        
-        // Show collage
-        collageContainer.style.display = "flex";
-
-        // Make final message appear in the middle of the collage
-        finalMessage.style.display = "block"; // Show the final message
-        // No need to set position here since it's handled by CSS
-
-        generateHearts();
-        generateFireworks();
+        document.getElementById("celebrationMessage").style.display = "block";
+        document.getElementById("collage").style.display = "grid";
+        showHearts();
     }
 
-    function generateHearts() {
-        for (let i = 0; i < 50; i++) {
+    function showHearts() {
+        const container = document.getElementById("hearts-container");
+        for (let i = 0; i < 30; i++) {
             const heart = document.createElement("div");
-            heart.classList.add("heart");
             heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * window.innerWidth + "px";
-            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-            heartsContainer.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
-    }
-
-    function generateFireworks() {
-        for (let i = 0; i < 10; i++) {
-            const firework = document.createElement("div");
-            firework.classList.add("firework");
-
-            // Center fireworks closer to the middle
-            firework.style.left = (window.innerWidth / 2) + (Math.random() * 200 - 100) + "px";
-            firework.style.top = (window.innerHeight / 2) + (Math.random() * 200 - 100) + "px";
-
-            fireworksContainer.appendChild(firework);
-            setTimeout(() => firework.remove(), 2000);
+            heart.className = "heart";
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            container.appendChild(heart);
         }
     }
 
