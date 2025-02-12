@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tauntDiv = document.getElementById("tauntMessage");
     const collageContainer = document.getElementById("collage-container");
     const heartsContainer = document.getElementById("hearts-container");
-    const finalMessage = document.getElementById("finalMessage");
+    const finalMessage = document.getElementById("final-message");
     let noClickCount = 0;
 
     function askQuestion() {
@@ -52,13 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
         tauntDiv.style.display = "none";
-        collageContainer.style.display = "block";
-        finalMessage.style.display = "block"; // Show the final message
+        collageContainer.style.display = "flex";
+        finalMessage.style.display = "block";
         generateHearts();
+        generateFireworks();
     }
 
     function generateHearts() {
-        for (let i = 0; i < 50; i++) { // Increased number of hearts
+        for (let i = 0; i < 50; i++) {
             const heart = document.createElement("div");
             heart.classList.add("heart");
             heart.innerHTML = "❤️";
@@ -70,6 +71,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 heart.remove();
             }, 5000);
         }
+    }
+
+    function generateFireworks() {
+        const fireworks = document.createElement("div");
+        fireworks.classList.add("fireworks");
+        document.body.appendChild(fireworks);
+        setTimeout(() => {
+            fireworks.remove();
+        }, 3000);
     }
 
     askQuestion();
