@@ -1,68 +1,74 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
+    let yesBtn; // "Yes" button appears after answering the question
     let noClickCount = 0;
-    let passwordAttempts = 0;
-    const correctPassword = "Miles";  // Correct answer to the password question
 
-    // Add a teaser message
-    const teaserMessage = document.createElement("div");
-    teaserMessage.innerHTML = "<h2>Want a surprise? Press 'No'! 🎁</h2>";
-    teaserMessage.style.position = "fixed";
-    teaserMessage.style.top = "20px";
-    teaserMessage.style.left = "50%";
-    teaserMessage.style.transform = "translateX(-50%)";
-    teaserMessage.style.textAlign = "center";
-    teaserMessage.style.fontSize = "1.5rem";
-    teaserMessage.style.color = "#ff3366";
-    document.body.appendChild(teaserMessage);
+    // Center buttons container
+    const btnContainer = document.createElement("div");
+    btnContainer.style.position = "fixed";
+    btnContainer.style.top = "50%";
+    btnContainer.style.left = "50%";
+    btnContainer.style.transform = "translate(-50%, -50%)";
+    btnContainer.style.display = "flex";
+    btnContainer.style.gap = "20px";
 
-    // Add a taunting message when she hovers over "No"
-    const tauntMessage = document.createElement("div");
-    tauntMessage.innerHTML = "<h2>You can't catch me! 😜</h2>";
-    tauntMessage.style.position = "fixed";
-    tauntMessage.style.bottom = "20px";
-    tauntMessage.style.left = "50%";
-    tauntMessage.style.transform = "translateX(-50%)";
-    tauntMessage.style.textAlign = "center";
-    tauntMessage.style.fontSize = "1.5rem";
-    tauntMessage.style.color = "#ff3366";
-    tauntMessage.style.opacity = "0";
-    document.body.appendChild(tauntMessage);
+    noBtn.style.fontSize = "24px";
+    noBtn.style.padding = "15px 30px";
+    noBtn.style.position = "relative";
+    noBtn.style.cursor = "pointer";
 
-    // Make "No" button move when hovered over
+    document.body.appendChild(btnContainer);
+    btnContainer.appendChild(noBtn);
+
+    // Ask question before showing "Yes"
+    function askQuestion() {
+        let answer = prompt("Who is your love? ❤️");
+        if (answer && answer.trim().toLowerCase() === "miles") {
+            createYesButton();
+        } else {
+            alert("Wrong answer! Try again. 😏");
+            askQuestion();
+        }
+    }
+    
+    // Create "Yes" button after correct answer
+    function createYesButton() {
+        yesBtn = document.createElement("button");
+        yesBtn.innerText = "Yes";
+        yesBtn.style.fontSize = "24px";
+        yesBtn.style.padding = "15px 30px";
+        yesBtn.style.cursor = "pointer";
+        btnContainer.appendChild(yesBtn);
+
+        yesBtn.addEventListener("click", function () {
+            if (noClickCount < 2) {
+                alert("Are you sure? Think again! 😏");
+                noClickCount++;
+            } else {
+                showCelebration();
+            }
+        });
+    }
+
+    // Make "No" button move and taunt
     noBtn.addEventListener("mouseover", function () {
         const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
         const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        noBtn.style.position = "absolute";
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
 
-        // Show the taunting message when hovering over "No"
-        tauntMessage.style.opacity = "1";
-        setTimeout(() => {
-            tauntMessage.style.opacity = "0";
-        }, 1000);
+        let tauntMessages = [
+            "You can't catch me! 😜",
+            "Too slow! 😆",
+            "Nice try! 😂",
+            "Keep chasing me! 😏",
+            "Hehe, not today! 😛"
+        ];
+        alert(tauntMessages[Math.floor(Math.random() * tauntMessages.length)]);
     });
 
-    yesBtn.addEventListener("click", function () {
-        if (passwordAttempts === 0) {
-            // Ask for password on first click
-            const password = prompt("Who is your love?");
-            if (password === correctPassword) {
-                alert("Password correct! But you still need to click 3 more times!");
-                passwordAttempts++;  // Increase attempt count after correct password
-            } else {
-                alert("Incorrect password. Try again!");
-            }
-        } else if (noClickCount < 2) {
-            alert("Are you sure? Think again! 😏");
-            noClickCount++;
-        } else {
-            showCelebration();
-        }
-    });
-
-    // Show the final celebration message
+    // Show final message + hearts fireworks
     function showCelebration() {
         document.body.innerHTML = `
             <div id="message">
@@ -71,10 +77,33 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
         showFireworks();
+        showFallingHearts();
     }
 
-    // Create fireworks animation
     function showFireworks() {
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                const heart = document.createElement("div");
+                heart.innerHTML = "💖";
+                heart.style.position = "fixed";
+                heart.style.fontSize = `${Math.random() * 50 + 30}px`;
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                heart.style.opacity = "1";
+                heart.style.transition = "opacity 1s ease-out, transform 1s ease-out";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.style.opacity = "0";
+                    heart.style.transform = "scale(2)";
+                }, 100);
+                
+                setTimeout(() => heart.remove(), 1000);
+            }, i * 300);
+        }
+    }
+
+    function showFallingHearts() {
         const container = document.createElement("div");
         container.style.position = "fixed";
         container.style.width = "100vw";
@@ -113,4 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         document.head.appendChild(style);
     }
+
+    // Start the question prompt
+    askQuestion();
 });
