@@ -33,10 +33,10 @@ jobs:
 
       - name: Debug - Confirm File Exists
         run: |
-          if [ ! -f valentines_script.py ]; then
+          if [ ! -f scripts/valentines_script.py ]; then
             echo "Error: valentines_script.py not found!"
             exit 1
           fi
 
       - name: Run the Valentine's Script
-        run: python valentines_script.py  # Ensure the file is named correctly
+        run: python scripts/valentines_script.py
