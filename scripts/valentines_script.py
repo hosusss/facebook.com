@@ -48,19 +48,25 @@ def generate_image(path):
         # Add the first text above the heart
         text1 = "Happy Valentine's Day!"
 
-        # Draw a more rounded heart shape (centered)
-        heart_width, heart_height = 200, 200  # Adjust heart dimensions
-        heart_position = ((img.width - heart_width) / 2, 200)  # Adjust vertical position as needed
+        # Draw a heart shape using two arcs and a polygon
+        heart_position = (150, 150)  # Position of the heart
+        heart_width = 200  # Width of the heart
+        heart_height = 200  # Height of the heart
 
-        # Heart shape with better defined points
-        draw.polygon(
-            [(heart_position[0] + 100, heart_position[1] + 50),  # Bottom center of the heart
-             (heart_position[0] + 50, heart_position[1] + 100),  # Left bottom
-             (heart_position[0] + 100, heart_position[1] + 150),  # Bottom center again
-             (heart_position[0] + 150, heart_position[1] + 100),  # Right bottom
-             (heart_position[0] + 100, heart_position[1] + 50)],  # Back to center bottom
-            fill="red"
-        )
+        # Draw the left half circle of the heart
+        draw.pieslice([heart_position, (heart_position[0] + heart_width, heart_position[1] + heart_height)],
+                      start=180, end=360, fill="red")
+
+        # Draw the right half circle of the heart
+        draw.pieslice([((heart_position[0] + heart_width / 2), heart_position[1]), 
+                      (heart_position[0] + heart_width, heart_position[1] + heart_height)],
+                      start=180, end=360, fill="red")
+
+        # Draw the bottom triangle of the heart
+        draw.polygon([(heart_position[0] + heart_width / 2, heart_position[1] + heart_height), 
+                      (heart_position[0] + heart_width, heart_position[1] + heart_height), 
+                      (heart_position[0] + heart_width / 4, heart_position[1] + heart_height * 1.5)],
+                      fill="red")
 
         # Add the first text above the heart (centered)
         text1_position = center_text(draw, text1, font, img.width, 50)  # Positioned above the heart
