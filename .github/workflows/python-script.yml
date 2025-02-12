@@ -27,56 +27,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install pillow  # Install Pillow
 
-    # Step 4: Debug: List files in the current directory
-    - name: Debug: List files in the current directory
+    # Step 4: Run the Valentine's script from the scripts folder
+    - name: Run the Valentine's script
       run: |
-        pwd  # Print working directory
-        ls -l  # List files in the directory
+        python scripts/valentines_script.py  # Updated to reflect the path
 
-    # Step 5: Run the script to generate image
-    - name: Run the script
-      run: |
-        python - <<EOF
-import os
-from PIL import Image
-
-# Path for the image
-image_path = 'valentine_fireworks.png'
-
-# Generate the image (you can replace this with your full script logic)
-img = Image.new('RGB', (100, 100), color='red')
-img.save(image_path)
-
-# Check if the image file exists
-if os.path.exists(image_path):
-    print('Image was created successfully!')
-else:
-    print('Failed to create image.')
-EOF
-        
-    # Step 6: Add error handling to capture any issues in the script
-    - name: Run the main Valentine's script with error handling
-      run: |
-        python - <<EOF
-try:
-    # Replace this with your actual script logic
-    from PIL import Image
-    img = Image.new('RGB', (100, 100), color='red')
-    img.save('valentine_fireworks.png')
-
-    # Check if the image was created
-    if not os.path.exists('valentine_fireworks.png'):
-        raise Exception('Image not created.')
-
-    print('Image created successfully!')
-
-except Exception as e:
-    print(f'Error occurred: {e}')
-    exit(1)
-EOF
-        
-    # Step 7: If you need to upload artifacts (like the image), you can add this
-    - name: Upload image as artifact (optional)
+    # Step 5: Upload image as artifact (optional)
+    - name: Upload image as artifact
       uses: actions/upload-artifact@v3
       with:
         name: valentine-fireworks-image
