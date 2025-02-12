@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
-    let yesBtn = document.getElementById("yesBtn"); // Get Yes button
+    const yesBtn = document.getElementById("yesBtn");
     let noClickCount = 0;
 
-    // Create a div for taunts
     const tauntDiv = document.getElementById("tauntMessage");
+    const finalMessage = document.getElementById("finalMessage");
+    const imageCollage = document.getElementById("imageCollage");
 
     // Hide "Yes" button initially
     yesBtn.style.display = "none";
@@ -19,17 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
             askQuestion();
         }
     }
-    
+
     // "Yes" button click event
     yesBtn.addEventListener("click", function () {
-        if (noClickCount === 0) {
-            tauntDiv.innerText = "Are you sure? 🤔";
-            noClickCount++;
-        } else if (noClickCount === 1) {
-            tauntDiv.innerText = "Are you really sure? 😳";
-            noClickCount++;
-        } else if (noClickCount === 2) {
-            tauntDiv.innerText = "Are you really really sure? 😍";
+        if (noClickCount < 3) {
+            const tauntMessages = [
+                "Are you sure? 🤔",
+                "Are you really sure? 😳",
+                "Are you really really sure? 😍"
+            ];
+            tauntDiv.innerText = tauntMessages[noClickCount];
+            tauntDiv.style.display = "block";
             noClickCount++;
         } else {
             showCelebration();
@@ -38,8 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Make "No" button move and display taunts
     noBtn.addEventListener("mouseover", function () {
-        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        const maxX = window.innerWidth - noBtn.clientWidth - 20;
+        const maxY = window.innerHeight - noBtn.clientHeight - 20;
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
         noBtn.style.position = "absolute";
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
@@ -52,15 +55,17 @@ document.addEventListener("DOMContentLoaded", function () {
             "Hehe, not today! 😛"
         ];
         tauntDiv.innerText = tauntMessages[Math.floor(Math.random() * tauntMessages.length)];
+        tauntDiv.style.display = "block";
     });
 
     function showCelebration() {
         document.getElementById("message").style.display = "block"; // Show message
-        document.getElementById("imageContainer").style.display = "block"; // Show images
-        showFireworks();
+        imageCollage.style.display = "grid"; // Show image collage
+        finalMessage.style.display = "block"; // Show final message
+        showFloatingHearts();
     }
 
-    function showFireworks() {
+    function showFloatingHearts() {
         const container = document.createElement("div");
         container.id = "hearts-container";
         document.body.appendChild(container);
