@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
         yesBtn = document.createElement("button");
         yesBtn.innerText = "Yes";
         yesBtn.className = "btn yes-btn";
-        document.getElementById("btnContainer").appendChild(yesBtn);
+        document.getElementById("container").appendChild(yesBtn);
 
         yesBtn.addEventListener("click", function () {
             if (noClickCount < 2) {
@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="message">
                 <h1>🎉 Advance Happy Valentine's Day! 💖</h1>
                 <h2>Advance Happy 7th Monthsary, My Love! ❤️</h2>
+                <img src="love.jpg" alt="Love" style="width: 300px; display: block; margin: 20px auto;">
             </div>
         `;
         showFireworks();
