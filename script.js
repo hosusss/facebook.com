@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function showCelebration() {
         document.getElementById("celebrationMessage").style.display = "block";
         document.getElementById("collage").style.display = "grid";
-        showFireworks();
+        showHearts();
     }
 
-    function showFireworks() {
+    function showHearts() {
         const container = document.getElementById("hearts-container");
         for (let i = 0; i < 30; i++) {
             const heart = document.createElement("div");
