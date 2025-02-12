@@ -22,12 +22,12 @@ def create_directory(directory):
         exit(1)
 
 # Function to center the text
-def center_text(draw, text, font, image_width):
+def center_text(draw, text, font, image_width, y_position):
     # Using textbbox instead of textsize
     text_bbox = draw.textbbox((0, 0), text, font=font)  # Get bounding box
     text_width = text_bbox[2] - text_bbox[0]  # Width of the text
     text_height = text_bbox[3] - text_bbox[1]  # Height of the text
-    position = ((image_width - text_width) / 2, 50)  # Adjust the vertical position (50) as needed
+    position = ((image_width - text_width) / 2, y_position)  # Adjust vertical position (y_position) as needed
     return position
 
 # Create a new image with a pink background
@@ -45,15 +45,8 @@ def generate_image(path):
         except IOError:
             font = ImageFont.load_default()
 
-        # Add some text to the image (centered)
+        # Add the first text above the heart
         text1 = "Happy Valentine's Day!"
-        text2 = "Happy 7 Monthsary!"
-
-        text1_position = center_text(draw, text1, font, img.width)
-        text2_position = center_text(draw, text2, font, img.width)
-        
-        draw.text(text1_position, text1, font=font, fill="white")
-        draw.text(text2_position, text2, font=font, fill="white")
 
         # Draw a heart shape (centered)
         heart_width, heart_height = 200, 100
@@ -66,6 +59,15 @@ def generate_image(path):
              (heart_position[0] + 50, heart_position[1] + 50)],
             fill="red"
         )
+
+        # Add the first text above the heart (centered)
+        text1_position = center_text(draw, text1, font, img.width, 50)  # Positioned above the heart
+        draw.text(text1_position, text1, font=font, fill="white")
+
+        # Add the second text below the heart
+        text2 = "Happy 7 Monthsary!"
+        text2_position = center_text(draw, text2, font, img.width, 350)  # Positioned below the heart
+        draw.text(text2_position, text2, font=font, fill="white")
 
         # Save the image
         img.save(path)
