@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const yesBtn = document.getElementById("yesBtn");
     let noClickCount = 0;
     let passwordAttempts = 0;
-    const correctPassword = "secret123";  // Set your password here
+    const correctPassword = "Miles";  // Correct answer to the password question
 
     // Add a teaser message
     const teaserMessage = document.createElement("div");
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     yesBtn.addEventListener("click", function () {
         if (passwordAttempts === 0) {
             // Ask for password on first click
-            const password = prompt("Enter the password to continue:");
+            const password = prompt("Who is your love?");
             if (password === correctPassword) {
                 alert("Password correct! But you still need to click 3 more times!");
                 passwordAttempts++;  // Increase attempt count after correct password
