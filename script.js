@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const collageContainer = document.getElementById("collage-container");
     const heartsContainer = document.getElementById("hearts-container");
     const finalMessage = document.getElementById("final-message");
+    const fireworksContainer = document.getElementById("fireworks-container");
     let noClickCount = 0;
 
     function askQuestion() {
@@ -33,8 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     noBtn.addEventListener("mouseover", function () {
-        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        const maxX = window.innerWidth - noBtn.clientWidth;
+        const maxY = window.innerHeight - noBtn.clientHeight;
+        const x = Math.max(0, Math.random() * maxX);
+        const y = Math.max(0, Math.random() * maxY);
         noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
         let tauntMessages = [
@@ -74,12 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function generateFireworks() {
-        const fireworks = document.createElement("div");
-        fireworks.classList.add("fireworks");
-        document.body.appendChild(fireworks);
-        setTimeout(() => {
-            fireworks.remove();
-        }, 3000);
+        for (let i = 0; i < 10; i++) {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            firework.style.left = Math.random() * window.innerWidth + "px";
+            firework.style.top = Math.random() * window.innerHeight + "px";
+            fireworksContainer.appendChild(firework);
+            setTimeout(() => firework.remove(), 2000);
+        }
     }
 
     askQuestion();
