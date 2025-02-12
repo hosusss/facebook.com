@@ -32,9 +32,9 @@ jobs:
       run: |
         python scripts/valentines_script.py  # Updated to reflect the path
 
-    # Step 5: Upload image as artifact (optional)
+    # Step 5: Upload image as artifact using v4
     - name: Upload image as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # Updated to v4
       with:
         name: valentine-fireworks-image
         path: valentine_fireworks.png
