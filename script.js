@@ -5,15 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create a div for taunts
     const tauntDiv = document.createElement("div");
-    tauntDiv.style.position = "fixed";
-    tauntDiv.style.top = "10%";
-    tauntDiv.style.left = "50%";
-    tauntDiv.style.transform = "translateX(-50%)";
-    tauntDiv.style.fontSize = "24px";
-    tauntDiv.style.color = "white";
-    tauntDiv.style.textShadow = "2px 2px 10px rgba(255, 0, 102, 0.8)";
-    tauntDiv.style.fontFamily = "Dancing Script, cursive";
-    tauntDiv.style.textAlign = "center";
+    tauntDiv.id = "tauntMessage";
     document.body.appendChild(tauntDiv);
 
     // Ask the question before showing "Yes" button
@@ -59,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
 
-        // Display a playful taunt
         let tauntMessages = [
             "You can't catch me! 😜",
             "Too slow! 😆",
@@ -75,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="message">
                 <h1>🎉 Advance Happy Valentine's Day! 💖</h1>
                 <h2>Advance Happy 7th Monthsary, My Love! ❤️</h2>
-                <img src="love.jpg" alt="Love" style="width: 300px; display: block; margin: 20px auto;">
-                <img src="love1.jpg" alt="Love" style="width: 300px; display: block; margin: 20px auto;">
-                <img src="love2.jpg" alt="Love" style="width: 300px; display: block; margin: 20px auto;">
-                <img src="love3.jpg" alt="Love" style="width: 300px; display: block; margin: 20px auto;">
+                <img src="love.jpg" alt="Love" class="final-img">
+                <img src="love1.jpg" alt="Love" class="final-img">
+                <img src="love2.jpg" alt="Love" class="final-img">
+                <img src="love3.jpg" alt="Love" class="final-img">
             </div>
         `;
         showFireworks();
@@ -86,44 +77,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showFireworks() {
         const container = document.createElement("div");
-        container.style.position = "fixed";
-        container.style.width = "100vw";
-        container.style.height = "100vh";
-        container.style.top = "0";
-        container.style.left = "0";
-        container.style.pointerEvents = "none";
+        container.id = "hearts-container";
         document.body.appendChild(container);
 
         for (let i = 0; i < 30; i++) {
             const heart = document.createElement("div");
             heart.innerHTML = "❤️";
-            heart.style.position = "absolute";
-            heart.style.fontSize = `${Math.random() * 30 + 20}px`;
+            heart.className = "heart";
             heart.style.left = `${Math.random() * 100}vw`;
-            heart.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+            heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
             container.appendChild(heart);
         }
-
-        const style = document.createElement("style");
-        style.innerHTML = `
-            @keyframes fall {
-                0% { transform: translateY(-10vh); opacity: 1; }
-                100% { transform: translateY(100vh); opacity: 0; }
-            }
-            #message {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                font-size: 2rem;
-                font-family: Arial, sans-serif;
-                color: red;
-            }
-        `;
-        document.head.appendChild(style);
     }
 
-    // Start the question prompt when the page loads
     askQuestion();
 });
