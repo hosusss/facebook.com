@@ -1,29 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Question</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: pink;
-        }
-        #container {
-            margin-top: 50px;
-        }
-        #noBtn {
-            position: absolute;
-        }
-    </style>
-</head>
-<body>
-    <div id="container">
-        <h1>Will you be my Valentine? 💖</h1>
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: pink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    button {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #f44336;
+        color: white;
+        position: absolute;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+</style>
