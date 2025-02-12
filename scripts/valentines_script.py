@@ -11,61 +11,59 @@ def create_directory(directory):
     try:
         if not os.path.exists(directory):
             os.makedirs(directory)
-            print(f"Directory '{directory}' created successfully.")
+            print(f"✅ Directory '{directory}' created successfully.")
         elif not os.path.isdir(directory):
-            print(f"Error: '{directory}' exists but is not a directory!")
-            exit(1)
+            print(f"❌ Error: '{directory}' exists but is not a directory!")
+            return False
         else:
-            print(f"Directory '{directory}' already exists.")
+            print(f"ℹ️ Directory '{directory}' already exists.")
+        return True
     except Exception as e:
-        print(f"Error creating directory '{directory}': {e}")
-        exit(1)
+        print(f"❌ Error creating directory '{directory}': {e}")
+        return False
 
-# Create a new image with a pink background
+# Function to generate and save the image
 def generate_image(path):
     try:
         # Create a new image with a pink background
         img = Image.new('RGB', (500, 500), color='pink')
-
-        # Set up drawing context
         draw = ImageDraw.Draw(img)
 
-        # Define the font for the text
+        # Define font (fallback handling)
         try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
+            font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+            font = ImageFont.truetype(font_path, 40)
         except IOError:
+            print(f"⚠️ Font '{font_path}' not found. Using default font.")
             font = ImageFont.load_default()
 
-        # Add the text
+        # Text details
         text1 = "Happy Valentine's Day!"
         text2 = "Happy 7 Monthsary!"
 
-        # Set the position of the text
-        text1_position = (50, 50)  # Just placing it at the top left, it can overlap
-        text2_position = (50, 200)  # Placing it below the heart
+        # Calculate text size and center it
+        text1_position = (50, 50)
+        text2_position = (50, 200)
 
-        # Draw the heart shape using a polygon
-        heart_points = [(250, 150), (300, 100), (350, 150), (250, 250), (150, 150), (200, 100)]
+        # Draw heart shape
+        heart_points = [(250, 150), (300, 100), (350, 150), 
+                        (325, 200), (250, 300), (175, 200), (150, 150), (200, 100)]
         draw.polygon(heart_points, fill='red')
 
-        # Add the text on the image
+        # Add text
         draw.text(text1_position, text1, font=font, fill="white")
         draw.text(text2_position, text2, font=font, fill="white")
 
         # Save the image
         img.save(path)
-        print(f"Image saved successfully at {path}")
+        print(f"✅ Image saved successfully at: {os.path.abspath(path)}")
     except Exception as e:
-        print(f"Error generating or saving image: {e}")
-        exit(1)
+        print(f"❌ Error generating or saving image: {e}")
 
 # Main function
 def main():
-    # Ensure the directory exists
-    create_directory(image_dir)
-
-    # Generate and save the image
-    generate_image(image_path)
+    if create_directory(image_dir):
+        generate_image(image_path)
 
 # Run the main function
 if __name__ == '__main__':
