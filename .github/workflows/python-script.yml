@@ -6,7 +6,7 @@ on:
       - main  # Runs on push to the main branch
   pull_request:
     branches:
-      - main  # Runs on pull request to main branch
+      - main  # Runs on pull request to the main branch
 
 jobs:
   run-script:
@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0  # Ensures all commits are available
 
       - name: Debug - List all files
-        run: ls -R  # Check if the valentines_script.py file exists
+        run: ls -R  # Check if valentines_script.py exists
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -31,5 +31,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install --no-cache-dir --force-reinstall -r requirements.txt
 
+      - name: Debug - Confirm File Exists
+        run: |
+          if [ ! -f valentines_script.py ]; then
+            echo "Error: valentines_script.py not found!"
+            exit 1
+          fi
+
       - name: Run the Valentine's Script
-        run: python valentines_script.py  # Adjust path if needed
+        run: python valentines_script.py  # Ensure the file is named correctly
