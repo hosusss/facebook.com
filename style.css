@@ -101,11 +101,10 @@ button:hover {
 }
 
 #collage {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Change to flex for better alignment */
+    flex-wrap: wrap; /* Allow images to wrap */
+    justify-content: center; /* Center images */
+    gap: 10px; /* Space between images */
     max-width: 600px;
     margin: 20px auto;
     position: relative;
