@@ -2,16 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const tauntDiv = document.getElementById("tauntMessage");
-    const collageContainer = document.getElementById("collage-container");
-    const heartsContainer = document.getElementById("hearts-container");
-    const finalMessage = document.getElementById("final-message");
-    const fireworksContainer = document.getElementById("fireworks-container");
+
     let noClickCount = 0;
 
     function askQuestion() {
         let answer = prompt("Who is your love? ❤️");
         if (answer && answer.trim().toLowerCase() === "miles") {
-            yesBtn.style.display = "inline-block";
+            yesBtn.style.display = "inline-block"; 
         } else {
             alert("Wrong answer! Try again. 😏");
             askQuestion();
@@ -34,14 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     noBtn.addEventListener("mouseover", function () {
-        const maxX = window.innerWidth - noBtn.clientWidth;
-        const maxY = window.innerHeight - noBtn.clientHeight;
-
-        // Ensure button stays within visible screen area
-        const x = Math.min(maxX, Math.random() * maxX);
-        const y = Math.min(maxY, Math.random() * maxY);
-
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
 
         let tauntMessages = [
             "You can't catch me! 😜",
