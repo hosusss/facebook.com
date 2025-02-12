@@ -36,8 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     noBtn.addEventListener("mouseover", function () {
         const maxX = window.innerWidth - noBtn.clientWidth;
         const maxY = window.innerHeight - noBtn.clientHeight;
-        const x = Math.max(0, Math.random() * maxX);
-        const y = Math.max(0, Math.random() * maxY);
+
+        // Ensure button stays within visible screen area
+        const x = Math.min(maxX, Math.random() * maxX);
+        const y = Math.min(maxY, Math.random() * maxY);
+
         noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
         let tauntMessages = [
@@ -55,8 +58,18 @@ document.addEventListener("DOMContentLoaded", function () {
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
         tauntDiv.style.display = "none";
+        
+        // Show collage
         collageContainer.style.display = "flex";
+
+        // Make final message appear in the middle of the collage
         finalMessage.style.display = "block";
+        finalMessage.style.position = "absolute";
+        finalMessage.style.top = "50%";
+        finalMessage.style.left = "50%";
+        finalMessage.style.transform = "translate(-50%, -50%)";
+        finalMessage.style.zIndex = "10"; // Ensure it appears above the images
+
         generateHearts();
         generateFireworks();
     }
@@ -80,8 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < 10; i++) {
             const firework = document.createElement("div");
             firework.classList.add("firework");
-            firework.style.left = Math.random() * window.innerWidth + "px";
-            firework.style.top = Math.random() * window.innerHeight + "px";
+
+            // Center fireworks closer to the middle
+            firework.style.left = (window.innerWidth / 2) + (Math.random() * 200 - 100) + "px";
+            firework.style.top = (window.innerHeight / 2) + (Math.random() * 200 - 100) + "px";
+
             fireworksContainer.appendChild(firework);
             setTimeout(() => firework.remove(), 2000);
         }
