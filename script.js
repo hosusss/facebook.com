@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const collage = document.getElementById("collage");
     const heartsContainer = document.getElementById("hearts-container");
     const celebrationMessage = document.getElementById("celebrationMessage");
+    const bgMusic = document.getElementById("bgMusic");
     let noClickCount = 0;
     let heartsGenerated = 0;
 
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         celebrationMessage.innerHTML = "<h2>Advance Happy Valentine's Day and Happy 7 Monthsary, My Love! 💖</h2>";
         generateHearts();
+        playMusic();
     }
 
     function generateHearts() {
@@ -83,6 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 5000);
         }
         heartsGenerated += 30;
+    }
+
+    function playMusic() {
+        if (bgMusic) {
+            bgMusic.currentTime = 39;
+            bgMusic.play().catch(error => console.log("Music playback failed: ", error));
+        }
     }
 
     askQuestion();
