@@ -37,10 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     noBtn.addEventListener("mouseover", function () {
-        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
-        noBtn.style.transition = "transform 0.3s ease-in-out";
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        const maxX = window.innerWidth - noBtn.clientWidth - 20;
+        const maxY = window.innerHeight - noBtn.clientHeight - 20;
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+        noBtn.style.position = "absolute";
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
 
         let tauntMessages = [
             "You can't catch me! 😜",
