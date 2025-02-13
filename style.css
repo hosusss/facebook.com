@@ -1,132 +1,84 @@
-/* Valentine Theme */
-body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #ffb6c1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-}
+document.addEventListener("DOMContentLoaded", function () {
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const tauntDiv = document.getElementById("tauntMessage");
+    const collageContainer = document.getElementById("collage-container");
+    const heartsContainer = document.getElementById("hearts-container");
+    const finalMessage = document.getElementById("finalMessage");
+    let noClickCount = 0;
 
-/* Title Animation */
-h1 {
-    font-size: 3rem;
-    color: red;
-    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.8);
-    animation: glow 1.5s infinite alternate;
-}
+    function askQuestion() {
+        let answer = prompt("Who is your love? ❤️");
+        if (answer && answer.trim().toLowerCase() === "miles") {
+            yesBtn.style.display = "inline-block";
+        } else {
+            alert("Wrong answer! Try again. 😏");
+            askQuestion();
+        }
+    }
 
-@keyframes glow {
-    0% { text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.8); }
-    100% { text-shadow: 4px 4px 20px rgba(255, 0, 0, 1); }
-}
+    yesBtn.addEventListener("click", function () {
+        if (noClickCount < 3) {
+            const messages = [
+                "Are you sure? 🤔",
+                "Are you really sure? 😳",
+                "Are you really really sure? 😍"
+            ];
+            tauntDiv.innerText = messages[noClickCount];
+            tauntDiv.style.display = "block";
+            noClickCount++;
+        } else {
+            showCelebration();
+        }
+    });
 
-/* Buttons Container */
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    margin-top: 20px;
-}
+    noBtn.addEventListener("mouseover", function () {
+        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-/* General Button Styles */
-button {
-    font-size: 1.8rem;
-    padding: 15px 35px;
-    margin: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
+        let tauntMessages = [
+            "You can't catch me! 😜",
+            "Too slow! 😆",
+            "Nice try! 😂",
+            "Keep chasing me! 😏",
+            "Hehe, not today! 😛"
+        ];
+        tauntDiv.innerText = tauntMessages[Math.floor(Math.random() * tauntMessages.length)];
+        tauntDiv.style.display = "block";
+    });
 
-/* "Yes" Button */
-#yesBtn {
-    background-color: #4CAF50;
-    color: white;
-    display: none;
-    animation: pulse 1.5s infinite;
-}
+    function showCelebration() {
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+        tauntDiv.style.display = "none";
+        collageContainer.style.display = "block";
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
+        // Randomly select the final message
+        const messages = [
+            "Advance Happy Valentine's Day! ❤️",
+            "Advance Happy Monthsary! 🎉"
+        ];
+        finalMessage.innerText = messages[Math.floor(Math.random() * messages.length)];
+        finalMessage.style.display = "block";
 
-/* "No" Button */
-#noBtn {
-    background-color: red;
-    color: white;
-    position: absolute;
-    transition: transform 0.2s ease-in-out;
-}
+        generateHearts();
+    }
 
-/* Button Hover Effect */
-button:hover {
-    transform: scale(1.15);
-}
+    function generateHearts() {
+        for (let i = 0; i < 50; i++) { // Increased number of hearts
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            heartsContainer.appendChild(heart);
 
-/* Taunt Message */
-#tauntMessage {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 12px 24px;
-    border-radius: 15px;
-    display: none;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    }
 
-/* Collage Grid */
-#collage {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-.collage-img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Floating Hearts */
-.heart {
-    position: absolute;
-    color: red;
-    font-size: 2rem;
-    animation: float 5s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    50% { transform: translateY(-50vh) scale(1.2); opacity: 0.7; }
-    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-} 
-
-#hearts-container {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-}
+    askQuestion();
+});
