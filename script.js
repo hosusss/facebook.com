@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const collage = document.getElementById("collage");
     const heartsContainer = document.getElementById("hearts-container");
     const celebrationMessage = document.getElementById("celebrationMessage");
-    const replayBtn = document.createElement("button");
     let noClickCount = 0;
     let heartsGenerated = 0;
 
@@ -63,9 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tauntDiv.innerText = "";
 
         celebrationMessage.innerHTML = "<h2>Advance Happy Valentine's Day and Happy 7 Monthsary, My Love! 💖</h2>";
-
         generateHearts();
-        addReplayButton();
     }
 
     function generateHearts() {
@@ -83,32 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 5000);
         }
         heartsGenerated += 30;
-    }
-
-    function addReplayButton() {
-        replayBtn.innerText = "Replay";
-        replayBtn.style.fontSize = "1.5rem";
-        replayBtn.style.padding = "10px 20px";
-        replayBtn.style.marginTop = "20px";
-        replayBtn.style.cursor = "pointer";
-        replayBtn.style.border = "none";
-        replayBtn.style.borderRadius = "10px";
-        replayBtn.style.backgroundColor = "#ff4d4d";
-        replayBtn.style.color = "white";
-        replayBtn.style.transition = "all 0.3s";
-        replayBtn.addEventListener("click", resetGame);
-        celebrationMessage.appendChild(replayBtn);
-    }
-
-    function resetGame() {
-        yesBtn.style.display = "none";
-        noBtn.style.display = "inline-block";
-        tauntDiv.style.display = "none";
-        collage.style.display = "none";
-        celebrationMessage.style.display = "none";
-        heartsContainer.innerHTML = "";
-        heartsGenerated = 0;
-        noClickCount = 0;
     }
 
     askQuestion();
