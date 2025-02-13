@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const heartsContainer = document.getElementById("hearts-container");
     const celebrationMessage = document.getElementById("celebrationMessage");
     const bgMusic = document.getElementById("bgMusic");
+    const mainTitle = document.querySelector("h1");
     let noClickCount = 0;
     let heartsGenerated = 0;
 
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
         tauntDiv.style.display = "none";
+        mainTitle.style.display = "none";
         collage.style.display = "grid";
         celebrationMessage.style.display = "block";
         tauntDiv.innerText = "";
