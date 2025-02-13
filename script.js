@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const tauntDiv = document.getElementById("tauntMessage");
-    const collageContainer = document.getElementById("collage-container");
+    const collage = document.getElementById("collage");
     const heartsContainer = document.getElementById("hearts-container");
-    const finalMessage = document.getElementById("finalMessage");
+    const celebrationMessage = document.getElementById("celebrationMessage");
     const replayBtn = document.createElement("button");
     let noClickCount = 0;
     let heartsGenerated = 0;
@@ -57,14 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
         tauntDiv.style.display = "none";
-        collageContainer.style.display = "block";
-
-        const messages = [
-            "Advance Happy Valentine's Day! ❤️",
-            "Advance Happy Monthsary! 🎉"
-        ];
-        finalMessage.innerText = messages[Math.floor(Math.random() * messages.length)];
-        finalMessage.style.display = "block";
+        collage.style.display = "grid";
+        celebrationMessage.style.display = "block";
+        
+        celebrationMessage.innerHTML = "<h2>Advance Happy Valentine's Day and Happy 7 Monthsary, My Love! 💖</h2>";
 
         generateHearts();
         addReplayButton();
@@ -99,19 +95,18 @@ document.addEventListener("DOMContentLoaded", function () {
         replayBtn.style.color = "white";
         replayBtn.style.transition = "all 0.3s";
         replayBtn.addEventListener("click", resetGame);
-        finalMessage.appendChild(replayBtn);
+        celebrationMessage.appendChild(replayBtn);
     }
 
     function resetGame() {
         yesBtn.style.display = "none";
         noBtn.style.display = "inline-block";
         tauntDiv.style.display = "none";
-        collageContainer.style.display = "none";
-        finalMessage.style.display = "none";
+        collage.style.display = "none";
+        celebrationMessage.style.display = "none";
         heartsContainer.innerHTML = "";
         heartsGenerated = 0;
         noClickCount = 0;
-        askQuestion();
     }
 
     askQuestion();
